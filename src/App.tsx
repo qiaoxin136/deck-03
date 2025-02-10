@@ -1,4 +1,4 @@
-//import { useEffect, useState } from "react";
+//import {  useState } from "react";
 //import type { Schema } from "../amplify/data/resource";
 //import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from "@aws-amplify/ui-react";
@@ -21,6 +21,7 @@ const INITIAL_VIEW_STATE = {
 function App() {
   //const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
   const { signOut } = useAuthenticator();
+  //const [viewport, setViewport] = useState(INITIAL_VIEW_STATE);
 
   
   // useEffect(() => {
@@ -39,8 +40,16 @@ function App() {
 
   return (
     <main>
-      return <MapView initialViewState={INITIAL_VIEW_STATE} />;
+      
+        <>
+        <MapView initialViewState={INITIAL_VIEW_STATE} style={{
+          position: 'absolute',
+          zIndex: -1,
+        }}/>;
       <button onClick={signOut}>Sign out</button>
+        </>
+      
+      
     </main>
   );
 }

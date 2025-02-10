@@ -7,6 +7,10 @@ import outputs from "../amplify_outputs.json";
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
+if (typeof global === 'undefined') {
+  window.global = window;
+}
+
 
 Amplify.configure(outputs);
 

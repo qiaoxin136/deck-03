@@ -51,3 +51,9 @@ li {
   display: inline-block;
   margin: 20px;
 }
+
+#map { /* The id of the container you passed to createMap */
+  height: 40vh;
+  width: 40vw;
+  margin: auto;
+}

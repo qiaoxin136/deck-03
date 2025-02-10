@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+#locations {
+  display: inline-block;
+  display: inline;
+}
+
+li {
+  padding: 5px;
+  display: inline-block;
+  margin: 20px;
+}

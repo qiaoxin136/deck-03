@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { DeckGL } from '@deck.gl/react';
+import { ScatterplotLayer } from '@deck.gl/layers';
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { MapView } from "@aws-amplify/ui-react-geo";
 //import { MapViewState } from '@deck.gl/react';
 import { Button } from '@aws-amplify/ui-react';
+
 import '@aws-amplify/ui-react/styles.css';
 import "maplibre-gl/dist/maplibre-gl.css";
 
@@ -21,7 +23,17 @@ const INITIAL_VIEW_STATE: any = {
 function App() {
   const { signOut } = useAuthenticator();
   const [viewport, setViewport] = useState(INITIAL_VIEW_STATE);
-  const layers:any = [];
+  const layers:any = [
+    new ScatterplotLayer({
+      id: 'scatterplot-layer',
+      data: [
+        { position: [-80.20321, 26.00068], color: [255, 0, 0], radius: 100 },
+      ],
+      getPosition: (d) => d.position,
+      getRadius: (d) => d.radius,
+      getFillColor: (d) => d.color,
+    }),
+  ];
 
   return (
     <main>

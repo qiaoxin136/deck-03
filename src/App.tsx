@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { DeckGL } from "deck.gl";
+import { DeckGL } from 'deck.gl';
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { MapView } from "@aws-amplify/ui-react-geo";
-import { MapViewState } from "deck.gl";
+import { MapViewState } from 'deck.gl';
 import { Button } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import "maplibre-gl/dist/maplibre-gl.css";
+
 
 const INITIAL_VIEW_STATE: MapViewState = {
   //longitude: 139.7674681227469,

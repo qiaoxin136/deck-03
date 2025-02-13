@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { DeckGL } from '@deck.gl/react';
+import {PickingInfo} from "@deck.gl/core";
 import {MVTLayer} from '@deck.gl/geo-layers';
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { MapView } from "@aws-amplify/ui-react-geo";
 //import { MapViewState } from '@deck.gl/react';
 import { Button } from '@aws-amplify/ui-react';
+
+
+import {
+  Marker, 
+  NavigationControl, 
+  GeolocateControl,
+  ScaleControl,
+} from 'react-map-gl';
 
 import '@aws-amplify/ui-react/styles.css';
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -25,6 +34,11 @@ const INITIAL_VIEW_STATE: any = {
 function App() {
   const { signOut } = useAuthenticator();
   const [viewport, setViewport] = useState(INITIAL_VIEW_STATE);
+ 
+  const onClick = useCallback((info: PickingInfo) => {
+    console.log(info.coordinate);
+  }, []);
+
   const layers:any = [];
 
   let layer82 = new MVTLayer({
@@ -179,16 +193,27 @@ function App() {
           onViewStateChange={({ viewState }) =>
             setViewport(viewState)
           }
+          onClick={onClick}
+          
         >
-          <Button onClick={signOut}>Sign out</Button>
+          <Button onClick={signOut}>Sign out</Button >
           <MapView
             {...viewport}
             initialViewState={INITIAL_VIEW_STATE}
+            
             style={{
               position: "absolute",
               zIndex: -1,
             }}
-          />
+            
+          >
+            
+            <Marker latitude={26.10} longitude={-80.25} />
+            <NavigationControl/>
+            <GeolocateControl/>
+            <ScaleControl />
+            
+          </MapView>
           
         </DeckGL>
         

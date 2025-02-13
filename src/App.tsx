@@ -34,9 +34,12 @@ const INITIAL_VIEW_STATE: any = {
 function App() {
   const { signOut } = useAuthenticator();
   const [viewport, setViewport] = useState(INITIAL_VIEW_STATE);
+  const [lat, setLat]=useState(0);
+  const [lng, setLng]=useState(0);
  
   const onClick = useCallback((info: PickingInfo) => {
-    console.log(info.coordinate);
+    setLng(Object.values(info)[8][0]);
+    setLat(Object.values(info)[8][1]);
   }, []);
 
   const layers:any = [];
@@ -208,7 +211,7 @@ function App() {
             
           >
             
-            <Marker latitude={26.10} longitude={-80.25} />
+            <Marker latitude={lat} longitude={lng} />
             <NavigationControl/>
             <GeolocateControl/>
             <ScaleControl />
